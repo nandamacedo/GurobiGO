@@ -102,16 +102,7 @@ public class FXMLGurobiDataEntryController implements Initializable {
 
             // Set objective: minimize x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9
             GRBLinExpr expr = new GRBLinExpr();
-            /* expr.addTerm(1.0, x1);
-            expr.addTerm(1.0, x2);
-            expr.addTerm(1.0, x3);
-            expr.addTerm(1.0, x4);
-            expr.addTerm(1.0, x5);
-            expr.addTerm(1.0, x6);
-            expr.addTerm(1.0, x7);
-            expr.addTerm(1.0, x8);
-            expr.addTerm(1.0, x9);*/
-            // model.setObjective(expr, GRB.MINIMIZE);*/
+
             model.set(GRB.IntAttr.ModelSense, GRB.MINIMIZE);
 
             // Add constraint: x1 >= 2
@@ -125,7 +116,7 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr = new GRBLinExpr();
             expr.addTerm(1.0, x1);
             expr.addTerm(1.0, x2);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 2.0, "c2");
+            model.addConstr(expr, GRB.GREATER_EQUAL,rt, "c2");
 
             // Add constraint: x1 + x2 +x3 >= 3
             rt = Double.parseDouble(rt3.getText());
@@ -133,14 +124,14 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr.addTerm(1.0, x1);
             expr.addTerm(1.0, x2);
             expr.addTerm(1.0, x3);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c3");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c3");
 
             // Add constraint:  x2 + x3 >= 3
             rt = Double.parseDouble(rt4.getText());
             expr = new GRBLinExpr();
             expr.addTerm(1.0, x3);
             expr.addTerm(1.0, x2);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c4");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c4");
 
             // Add constraint: x4 = 0            
             expr = new GRBLinExpr();
@@ -152,14 +143,14 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr = new GRBLinExpr();
             expr.addTerm(1.0, x5);
             expr.addTerm(1.0, x3);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c6");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c6");
 
             // Add constraint:  x6 + x5 >= 3
             rt = Double.parseDouble(rt6.getText());
             expr = new GRBLinExpr();
             expr.addTerm(1.0, x6);
             expr.addTerm(1.0, x5);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c7");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c7");
 
             // Add constraint:  x7 +x6 +x5 >= 3
             rt = Double.parseDouble(rt7.getText());
@@ -167,7 +158,7 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr.addTerm(1.0, x7);
             expr.addTerm(1.0, x6);
             expr.addTerm(1.0, x5);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c8");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c8");
 
             // Add constraint:  x8 +x7 +x6 >= 3
             rt = Double.parseDouble(rt8.getText());
@@ -175,7 +166,7 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr.addTerm(1.0, x8);
             expr.addTerm(1.0, x7);
             expr.addTerm(1.0, x6);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c9");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c9");
 
             // Add constraint:  x9 +x8 +x7 >= 3
             rt = Double.parseDouble(rt9.getText());
@@ -183,20 +174,7 @@ public class FXMLGurobiDataEntryController implements Initializable {
             expr.addTerm(1.0, x9);
             expr.addTerm(1.0, x8);
             expr.addTerm(1.0, x7);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 3.0, "c10");
-
-            // Add constraint:  x1 ... x9 >= 0
-            expr = new GRBLinExpr();
-            expr.addTerm(1.0, x1);
-            expr.addTerm(1.0, x2);
-            expr.addTerm(1.0, x3);
-            expr.addTerm(0.0, x4);
-            expr.addTerm(1.0, x5);
-            expr.addTerm(1.0, x6);
-            expr.addTerm(1.0, x7);
-            expr.addTerm(1.0, x8);
-            expr.addTerm(1.0, x9);
-            model.addConstr(expr, GRB.GREATER_EQUAL, 0.0, "c11");
+            model.addConstr(expr, GRB.GREATER_EQUAL, rt, "c10");
 
             // Optimize model
             model.optimize();

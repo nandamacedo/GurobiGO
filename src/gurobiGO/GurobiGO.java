@@ -19,7 +19,7 @@ public class GurobiGO extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLGurobi.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLGurobiDataEntry.fxml"));
 
         Scene scene = new Scene(root);
 
